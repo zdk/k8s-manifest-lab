@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  labels:
+    isSyncedFromSupervisor: "yes"
+  name: tanzu-storage-retain
+parameters:
+  svStorageClass: tanzu-storage
+provisioner: csi.vsphere.vmware.com
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: Immediate

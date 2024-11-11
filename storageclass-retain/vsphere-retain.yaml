@@ -1,0 +1,29 @@
+# 2. Create PVC using the Storage Class
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: tanzu-storage-retain
+---
+# 3. Create a test pod to use the PVC
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+    - name: test-container
+      image: nginx
+      volumeMounts:
+        - mountPath: "/data"
+          name: test-volume
+  volumes:
+    - name: test-volume
+      persistentVolumeClaim:
+        claimName: test-pvc
