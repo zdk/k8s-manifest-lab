@@ -1,0 +1,13 @@
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce  # vSphere CSI typically supports RWO
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: tanzu-storage
+
