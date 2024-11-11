@@ -1,4 +1,4 @@
-k apply ./contour.yaml
-k apply ./httpbin.yaml
-k apply ./nginx-deployment-service.yaml
-k apply ./ingress.yaml
+k apply -f ./contour.yaml
+k apply -f ./httpbin.yaml
+k apply -f ./nginx-deployment-service.yaml
+k apply -f ./ingress.yaml
