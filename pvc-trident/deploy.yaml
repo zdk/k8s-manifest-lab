@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trident-test-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: trident-test
+  template:
+    metadata:
+      labels:
+        app: trident-test
+    spec:
+      containers:
+        - name: test-container
+          image: nginx:latest
+          volumeMounts:
+            - name: test-volume
+              mountPath: /data
+          command: ['/bin/sh']
+          args: ['-c', 'while true; do date >> /data/timestamp.txt; hostname >> /data/hostname.txt; sleep 30; done']
+      volumes:
+        - name: test-volume
+          persistentVolumeClaim:
+            claimName: trident-test-pvc
